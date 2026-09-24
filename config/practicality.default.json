@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "name": "Conservative review defaults",
+  "basis": "Illustrative editable starting values, not discovered user preferences or permission to run experiments. Local policy copies should state which preferences were user-stated and which limits remain defaults.",
+  "policies": {
+    "personal": {
+      "required_facts": ["frequency_monthly", "current_workflow", "setup_minutes", "cash_setup", "ongoing_minutes_monthly", "cash_ongoing", "expected_benefit", "minutes_saved_per_use", "measured_benefit", "alternative_solution", "adoption_fit", "evidence_quality", "experiment_minutes"],
+      "priorities": ["adoption", "benefit", "frequency", "setup", "upkeep", "evidence", "observed_usefulness"],
+      "criteria": [
+        {"id": "adoption", "fact": "adoption_fit", "weight": 5, "rule": "assessment", "reason": "The person must have a reason to adopt it over the current workflow."},
+        {"id": "benefit", "fact": "expected_benefit", "weight": 4, "rule": "assessment", "reason": "Useful capability or improvement against an explicit baseline."},
+        {"id": "frequency", "fact": "frequency_monthly", "weight": 3, "rule": "higher", "strong": 8, "moderate": 2, "unit": "uses/month", "reason": "Repeated opportunities to benefit make setup easier to justify."},
+        {"id": "setup", "fact": "setup_minutes", "weight": 3, "rule": "lower", "strong": 30, "moderate": 120, "unit": "minutes", "reason": "Total initial time includes building, learning, integration and testing."},
+        {"id": "upkeep", "fact": "ongoing_minutes_monthly", "weight": 3, "rule": "lower", "strong": 10, "moderate": 30, "unit": "minutes/month", "reason": "Count maintenance and recurring effort, not just build time."},
+        {"id": "evidence", "fact": "evidence_quality", "weight": 5, "rule": "assessment", "reason": "Relevant observations matter more than an attractive estimate."},
+        {"id": "observed_usefulness", "fact": "actual_usefulness", "weight": 5, "rule": "assessment", "reason": "Actual attributed outcomes should affect the next evaluation of this same idea."}
+      ],
+      "hard_constraints": [
+        {"id": "experiment_time", "fact": "experiment_minutes", "op": "le", "limit": 30, "unit": "minutes", "scope": "experiment", "reason": "Default maximum attention for the proposed first test; editable, not approval."},
+        {"id": "initial_time", "fact": "setup_minutes", "op": "le", "limit": 120, "unit": "minutes", "scope": "implementation", "reason": "Default initial-time ceiling for a small personal improvement."}
+      ]
+    },
+    "commercial": {
+      "required_facts": ["plausible_customer", "current_alternative", "reason_to_switch", "acquisition_route", "support_burden", "ongoing_maintenance", "communication_requirements", "skill_fit", "enthusiasm_fit", "evidence_quality", "setup_minutes", "cash_setup", "cash_ongoing", "expected_benefit", "experiment_minutes", "written_support_minutes_weekly"],
+      "priorities": ["communication", "acquisition", "switch_reason", "customer", "support", "maintenance", "skills", "enthusiasm", "evidence", "observed_usefulness"],
+      "criteria": [
+        {"id": "communication", "fact": "communication_requirements", "weight": 5, "rule": "assessment", "reason": "Assess the communication work created by owning the product."},
+        {"id": "acquisition", "fact": "acquisition_route", "weight": 5, "rule": "assessment", "reason": "A route needs evidence; listing a product alone is not a distribution strategy."},
+        {"id": "switch_reason", "fact": "reason_to_switch", "weight": 4, "rule": "assessment", "reason": "A buyer needs a meaningful advantage over current alternatives."},
+        {"id": "customer", "fact": "plausible_customer", "weight": 4, "rule": "assessment", "reason": "A specific buying situation is more useful than an invented market size."},
+        {"id": "support", "fact": "support_burden", "weight": 5, "rule": "assessment", "reason": "Count recurring customer help and exceptions."},
+        {"id": "maintenance", "fact": "ongoing_maintenance", "weight": 4, "rule": "assessment", "reason": "Count compatibility, corrections and operations."},
+        {"id": "skills", "fact": "skill_fit", "weight": 3, "rule": "assessment", "reason": "Use bounded demonstrated contributions or label claimed skills and uncertainty."},
+        {"id": "enthusiasm", "fact": "enthusiasm_fit", "weight": 4, "rule": "assessment", "reason": "An adjacent interest does not prove enthusiasm for running this particular business."},
+        {"id": "evidence", "fact": "evidence_quality", "weight": 5, "rule": "assessment", "reason": "Demand, feasibility and personal fit need separate relevant evidence."},
+        {"id": "observed_usefulness", "fact": "actual_usefulness", "weight": 3, "rule": "assessment", "reason": "A reported outcome informs this idea, without predicting general market success."}
+      ],
+      "hard_constraints": [
+        {"id": "experiment_time", "fact": "experiment_minutes", "op": "le", "limit": 45, "unit": "minutes", "scope": "experiment", "reason": "A desk assessment must fit the default first-test time limit."},
+        {"id": "live_calls", "fact": "requires_live_calls", "op": "eq", "limit": false, "scope": "implementation", "reason": "Conservative example constraint; confirm or edit the local policy."},
+        {"id": "custom_client_work", "fact": "requires_custom_client_work", "op": "eq", "limit": false, "scope": "implementation", "reason": "A repeatable-product default must not hide client-specific delivery work."},
+        {"id": "written_support", "fact": "written_support_minutes_weekly", "op": "le", "limit": 60, "unit": "minutes/week", "scope": "implementation", "reason": "An illustrative cap; acceptable written support must be confirmed locally."}
+      ]
+    },
+    "creative": {
+      "required_facts": ["attention_minutes", "compute_cost", "thought_potential", "useful_thoughts", "saved", "revisited", "evidence_quality", "alternative_solution", "experiment_minutes"],
+      "priorities": ["attention", "thoughts", "saved", "revisited", "evidence"],
+      "criteria": [
+        {"id": "attention", "fact": "attention_minutes", "weight": 4, "rule": "lower", "strong": 10, "moderate": 20, "unit": "minutes", "reason": "Protect attention without inventing a financial return."},
+        {"id": "thoughts", "fact": "thought_potential", "weight": 3, "rule": "assessment", "reason": "The possibility of useful thoughts is a hypothesis until the user responds."},
+        {"id": "saved", "fact": "saved", "weight": 2, "rule": "assessment", "reason": "An explicit save is a narrow behavioral signal, not a permanent interest."},
+        {"id": "revisited", "fact": "revisited", "weight": 3, "rule": "assessment", "reason": "An attributed revisit may indicate continuing value in context."},
+        {"id": "evidence", "fact": "evidence_quality", "weight": 2, "rule": "assessment", "reason": "Separate invented premises from evidence that they caused useful thought."}
+      ],
+      "hard_constraints": [
+        {"id": "experiment_time", "fact": "experiment_minutes", "op": "le", "limit": 20, "unit": "minutes", "scope": "experiment", "reason": "Editable attention budget for one exploration."},
+        {"id": "attention", "fact": "attention_minutes", "op": "le", "limit": 20, "unit": "minutes", "scope": "experiment", "reason": "Keep the whole proposed exercise within the attention budget."}
+      ]
+    }
+  },
+  "learning": {"min_distinct_ideas": 2, "propose_setup_cap_minutes": 60}
+}

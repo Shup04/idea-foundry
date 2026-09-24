@@ -1,0 +1,11 @@
+FROM python:3.13-slim
+WORKDIR /check
+ENV PYTHONDONTWRITEBYTECODE=1
+COPY requirements.txt .
+COPY .dev-wheels/ /wheels/
+RUN pip install --no-index --find-links /wheels -r requirements.txt
+COPY foundry/ foundry/
+COPY tests/ tests/
+COPY config/ config/
+RUN python -m compileall -q foundry tests && python -m tabnanny foundry tests
+CMD ["python", "-B", "-m", "unittest", "discover", "-v"]

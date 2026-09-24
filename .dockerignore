@@ -1,0 +1,13 @@
+**
+!Dockerfile.dev
+!requirements.txt
+!.dev-wheels/
+!.dev-wheels/*.whl
+!foundry/
+!foundry/**
+!tests/
+!tests/**
+!config/
+!config/**
+**/__pycache__/
+**/*.pyc

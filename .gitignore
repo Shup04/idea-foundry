@@ -1,5 +1,7 @@
 # Private inputs, outputs, feedback, provider settings, logs and local state
 .foundry-data/
+# User-supplied brief includes private corrections and personal context.
+docs/Idea_Foundry_Revised_Product_Brief.md
 .env
 .env.*
 !.env.example
@@ -10,6 +12,7 @@
 *.sqlite3-wal
 *.sqlite3-shm
 # Development artifacts
+.dev-wheels/
 .venv/
 venv/
 __pycache__/
