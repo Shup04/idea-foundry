@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-__CSP_HASH__'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>My skill universe · Idea Foundry</title>
+  <style>__STYLE__</style>
+</head>
+<body>
+  <header>
+    <div><span class="eyebrow">IDEA FOUNDRY</span><h1>My skill universe</h1></div>
+    <div class="snapshot"><span id="dataset"></span><span id="counts"></span></div>
+  </header>
+  <main>
+    <section class="map-panel" aria-label="Interactive skill graph">
+      <div class="map-toolbar"><p id="map-caption">Projects are planets. Skills connect their stories.</p>
+        <button id="overview">Overview</button></div>
+      <svg id="universe" viewBox="0 0 1100 800" role="group" aria-label="Projects and experiences connected by shared skills">
+        <title>Your projects, experiences and shared skills</title>
+        <desc>Use the searchable list for an alternative to navigating the diagram. Select a skill to see every connected experience.</desc>
+      </svg>
+      <div class="map-bottom"><div class="legend"><span><i class="planet-key"></i> Experience</span><span><i class="skill-key"></i> Skill or interest</span><span>Dashed = needs context</span></div>
+        <div class="zoom" aria-label="Map zoom controls"><button id="zoom-out" aria-label="Zoom out">−</button><button id="reset-view" aria-label="Reset map position">Reset</button><button id="zoom-in" aria-label="Zoom in">+</button></div>
+      </div>
+      <p class="map-note">Select a planet or skill. Drag to pan. Connections describe evidence and your role; distance and size do not rate ability.</p>
+    </section>
+    <aside aria-label="Graph details and search">
+      <section id="inspector" aria-live="polite"></section>
+      <section class="browse" aria-label="Search all experiences and skills">
+        <label for="search">Find a skill, interest or experience</label>
+        <input id="search" type="search" placeholder="Python, graphics, research…" autocomplete="off">
+        <div class="filters"><label><input id="show-all" type="checkbox"> Show all skills and interests</label><label><input id="show-ruled-out" type="checkbox"> Include ruled-out connections</label></div>
+        <p id="search-count" class="muted"></p>
+        <div id="node-list"></div>
+      </section>
+    </aside>
+  </main>
+  <footer>Private local snapshot. Use Foundry to answer questions and update connections, then reopen the solar view.</footer>
+  <script type="application/json" id="graph-data">__DATA__</script>
+  <script>__SCRIPT__</script>
+</body>
+</html>
