@@ -1,6 +1,16 @@
 # Idea Foundry — three substantial passes
 
+**Current grouped refinement, 2026-09-24:** implement the user's requested single pass on personal knowledge only: unified selected input; lossless resumable sections; interpretation with bounded reviewed graph context; reviewable support/update/conflict/question-resolution actions; explicit canonical experiences/skills; readable About me, local evidence search, broader questions and exports. Preserve originals, current reviews and the existing $5 total cloud cap. Verify scope, quotes, stale targets, budgets, restart/recovery, withdrawal, larger synthetic profiles, compact terminal operation and a bounded live trial. Stop after this complete refinement for the user's review; historical idea passes remain deferred.
+
+**Current addition, 2026-09-24:** the user authorized OpenAI answer interpretation and embedding retrieval as the next knowledge-graph step. Implement it through existing capture/review/map controls, with selected interview context, no model tools, a cumulative API cap, retained evidence and recovery that avoids repeating completed calls. This supersedes the manual-only restriction for this narrow route; source extraction and idea-generation gates retain their existing scope. The execution record is at the top of STATUS.md.
+
+**Current override, 2026-09-23:** implement only the personal knowledge graph described at the top of [PRODUCT.md](PRODUCT.md). Guided questions, reuse of uploaded skills, selected imports, reviewed relationships and portable exports precede all idea work. The execution record is at the top of [STATUS.md](STATUS.md). The plans below are historical and do not authorize idea generation or validation now.
+
+The current authorized refinement adds shared experience/skill entities, an offline solar visualization, contribution-aware skill descriptions, project interviews, occasional circumstances check-ins and explicitly selected GitHub evidence through the existing login. Both user-selected repositories are authorized for this session's first manual assessment. New repository contents and later cloud processing still require explicit selection. Stop after the graph refinement for the user's review.
+
 **Status:** Pass 1 review artifacts completed on 2026-09-05; Gate 1 awaits the user. Passes 2–3 have not started. See `docs/STATUS.md` for execution evidence. This is an implementation and learning plan, not an application.
+
+**Current scope supersedes the next step in this historical plan:** the latest user request authorizes one grouped selected-source → review → small idea feed → practicality comparison workflow on the evidence prototype. Its short execution plan is in [STATUS.md](STATUS.md), and launch/usage is in [README.md](../README.md). This does not authorize all the historical Pass 2 features or imply a personal accuracy/usefulness gate approval.
 
 ## Operating rule
 

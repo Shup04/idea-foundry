@@ -1,6 +1,28 @@
 # Idea Foundry — product contract
 
+## Current product: a personal knowledge graph
+
+**Current refinement, 2026-09-24:** the user authorized one cohesive pass for easy input/output and a stronger personal graph. Home prioritizes **Add information** and **About me**, with a useful optional question, map and review. Explicitly selected pasted text and UTF-8 text/Markdown/JSON/CSV files can use the OpenAI route with bounded relevant reviewed graph context. This expands the earlier interview-only scope. Keep the existing cumulative $5 cap, selected-content previews, no tools/connectors or background processing, and human review of additions and changes. Imports preserve original versions and show resumable progress and model-reported omissions. Supporting evidence, updates, conflicts and resolutions are distinct proposals. Current projections may supersede old statements only after review; historical evidence stays intact. About me is a readable evidence-backed projection with local search, broad questions and portable export. No claim of exhaustive personal understanding or automatic truth validation.
+
+The main interface should present one experience and one useful next question, with a single primary action. The map and pending suggestions stay easy to reach. Occasional imports, skill editing, source inspection and record maintenance belong behind a clearly labeled More menu, with short descriptions and a consistent return to Home. Do not expose every internal capability as a top-level control.
+
+The next authorized refinement is a connected skill map. Projects, work, research and education are distinct entities; named skills are shared across experiences. The solar visualization must expose these connections and their evidence. Capability descriptions are scoped to experience and subject: conceptual understanding, adapting, designing and debugging can differ, as can the amount of AI/team assistance. Artifact complexity alone must not become a claim of personal mastery. Project interviews should record enjoyment, friction, contribution and motivation and let the user explicitly refine a connection. Current circumstances use optional occasional check-ins, not a calendar or daily reporting obligation. Existing approved records are reused. Repository assessment is limited to explicitly selected repositories and remains unverified until evidence is inspected and the user confirms their contribution.
+
+The 2026-09-23 user direction supersedes the discovery-first sequence below. The eventual goal is business idea generation and validation; the entire current application workflow is understanding the user first. No idea generation, evaluation or scoring belongs in the active interface until the user asks to resume it.
+
+Build on already uploaded skills and reviewed information. Provide guided questions plus imports of files the user explicitly selects. Capture skills and experience, interests, preferences, values, self-described personality, working and learning style, motivations, goals, constraints, resources and risk preferences. Allow additional context without claiming exhaustive knowledge of a person.
+
+Personal statements must preserve their wording and evidence. Connect them through explicit, inspectable relationships. Distinguish reported skills from demonstrated contributions, current information from history, and user descriptions from model interpretations. Keep corrections, conflicts, uncertain material and gaps visible. Questions should prioritize gaps and offer deeper follow-ups without requiring repeated entry of existing information. Local Markdown and structured graph exports must remain readable without this app. No invented personality diagnosis or completeness score.
+
+Use the existing local evidence store and manual, explicitly approved model handoff for selected-source extraction. A typed answer is usable immediately as a user statement. Model proposals require review. Existing personal data stays in the ignored workspace; synthetic demonstrations remain separate. The next gate is the user's review of this graph workflow, not permission to resume the historical passes below.
+
+The 2026-09-24 direction authorizes a bounded OpenAI API route for interpreting saved project-interview answers and finding related answers with embeddings. Use the environment key (`OPENM_AI_API_KEY`, then `OPENAI_API_KEY`), a user-chosen cumulative spending cap, and explicit save/process actions. Include only interview answers, their questions and project/skill labels; no raw repository contents, unrelated sources, tools or connectors. Preserve quoted evidence and context. Stage interpretations in the existing review queue; accepted connections enrich the graph. Embedding similarity remains a retrieval hint. The cap does not reset on restart, uncertain requests retain reservations, and no request runs on startup or a schedule. An API key does not grant permission to expand input scope or resume idea generation.
+
+## Historical discovery contract
+
 **Status:** Proposed V1 contract. Human approval is required at the build-plan gates.
+
+The later supplied brief and latest user request supersede this document's immediate build sequence. The authorized grouped implementation is the [selected-source workflow](../README.md): explicitly selected local text, proposed information, human correction, a small manual Codex idea handoff and editable practicality comparisons. Additional providers, automatic ingestion/research and unattended operation remain deferred. Personal accuracy, usefulness and demonstration defaults are not approved. Personal corrections and source material stay private.
 
 ## 1. Purpose
 
