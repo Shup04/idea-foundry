@@ -2,13 +2,32 @@
 
 The current product is a **personal knowledge graph**. Build a useful, inspectable picture of your skills, experience, preferences, personality, values, working habits, goals and circumstances. Business idea generation and validation come later, after you are happy with this foundation.
 
-## Launch
+## The idea behind the graph
+
+Foundry began with a creative goal: bring together unusual raw material, useful mechanisms and personal experience to help you explore your own ideas. The current [product contract](docs/PRODUCT.md) puts a more concrete foundation first: preserve what you actually said, connect it to evidence, and let you correct how it is understood. The historical discovery experiments remain in the repository, but they are not the active product.
+
+The important distinction is between a source, an interpretation and something you have reviewed. A project mentioning a technology does not establish your mastery of it; enjoying an activity does not establish skill depth. Skills are shared across experiences, while contribution, assistance, confidence and historical context remain specific to each experience. The map and **About me** are views over that evidence, not personality or ability scores.
+
+The current flow is **selected text/files → preserved originals → reviewable suggestions → reviewed profile and skill map → portable exports**. New evidence can support an existing statement, propose an update, flag a conflict or answer an open question. Review changes the current view while retaining the earlier wording and sources.
+
+Use the sections below for [setup](#setup-and-launch), [optional AI interpretation](#understand-your-answers-with-openai), [selected GitHub evidence](#private-github-evidence), [data and backups](#your-data), and [implementation details](#small-local-architecture).
+
+## Setup and launch
+
+The concrete target is Linux, Python 3.13+ and Textual 8.2.8. From a fresh checkout, with `python3` pointing to a supported interpreter:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+This installs the pinned terminal dependencies. No graph database, server, GPU or Docker runtime is needed to use the app. An API key is optional for the local capture/review/export workflow. Once the environment is prepared, launch with:
 
 ```bash
 .venv/bin/python -B -m foundry ui
 ```
 
-Your existing uploads and reviewed statements are reused. On **Home**, choose **Add information** to paste anything you want the graph to remember. You can describe several topics together without choosing categories. **Files and context** lets you select exact UTF-8 text, Markdown, JSON or CSV files and optionally name an existing experience. **Preview** shows the selected content and relevant existing knowledge, then **Save & understand** saves the original before requesting suggestions. **Save locally** works without AI. Home starts with **About me as a whole** and a useful broader question; choose a specific experience in the same selector for a project question.
+An existing workspace reuses its uploads and reviewed statements; a fresh clone does not contain ignored personal data. On **Home**, choose **Add information** to paste anything you want the graph to remember. You can describe several topics together without choosing categories. **Files and context** lets you select exact UTF-8 text, Markdown, JSON or CSV files and optionally name an existing experience. **Preview** shows the selected content and relevant existing knowledge, then **Save & understand** saves the original before requesting suggestions. **Save locally** works without AI. Home starts with **About me as a whole** and a useful broader question; choose a specific experience in the same selector for a project question.
 
 - **View map** opens the interactive solar graph in your browser. Select a skill to see the experiences it connects.
 - **About me** presents your direction, preferences, ways of working, circumstances, experience and scoped skills. Search it to see matching reviewed statements and exact supporting passages. Missing context and unresolved questions are visible without a completeness score.
@@ -37,7 +56,7 @@ The total spending cap persists across restarts. Before a call, Foundry reserves
 
 Accepted facts add shared skills, explicitly named experiences, interests and other scoped connections to the solar map and portable graph. Evidence of enjoying an activity does not establish skill depth. Explicit manual skill descriptions take precedence over accepted AI suggestions. Previously cached related answers remain retrieval hints; embedding similarity never creates a confirmed relationship. The unified route uses local retrieval of reviewed graph context without requiring another embedding call. Corrections and excluded answers remove their derived connections from the current view. Old answers that did not save the full question are identified as having reconstructed question context.
 
-Terminal-free setup and use are also available:
+Command-line AI controls are also available:
 
 ```bash
 .venv/bin/python -B -m foundry understand --preview
@@ -95,7 +114,7 @@ An empty synthetic workspace can be opened with `--dataset synthetic`. Dataset i
 
 `openai_api.py` contains the bounded standard-library HTTP adapter. `understanding_contract.py` defines the extraction prompt/schema and semantic-field constraints; `understanding.py` stages suggestions, records calls and projects reviewed connections. Requests, responses and prompt versions are preserved under the private workspace's `ai/` directory. The embedding cache is outside versioned evidence revisions to avoid copying vectors on every edit. `ui_understanding.py` provides the single setup/catch-up screen. No added runtime dependencies or vector database are required.
 
-`capture.py` handles the selected-input queue and resumable analysis, `memory.py` defines quoted extraction and reversible reviewed reconciliation, and `profile.py` renders readable output with local search. UI controls live in `ui_capture.py`; the standard-library core remains separate.
+[`capture.py`](foundry/capture.py) handles the selected-input queue and resumable analysis, [`memory.py`](foundry/memory.py) defines quoted extraction and reversible reviewed reconciliation, and [`profile.py`](foundry/profile.py) renders readable output with local search. UI controls live in `ui_capture.py`; the standard-library core remains separate. [`storage.py`](foundry/storage.py) owns the locked, versioned state writes and atomic current-revision pointer.
 
 Workspace budgets are explicit: 10,000 claims, 10,000 proposals, 20,000 sources/corrections, 5,000 statement relationships, 200 manual handoffs and 100 MB per expanded revision. Limits include retained history. New revisions of at least 1 MB are stored as gzip-compressed JSON; older uncompressed revisions remain readable and unchanged. The atomic pointer records the format, and hashes cover the original JSON. Each revision still represents the complete state, so history continues to grow. These limits are guardrails, not a benchmark at maximum capacity. Older manual input selections retain their 20,000-character/120 KB reply bounds; local resume extraction retains its 200-detail limit. A limit fails visibly without replacing the previous state. Pending input and handoffs survive restart and never resume as background jobs.
 
@@ -103,7 +122,7 @@ The earlier evaluation modules and prototype CLI remain for historical data and 
 
 ## Development
 
-Python 3.13+ and Textual 8.2.8 are the current targets. The repository-local environment is already prepared. Run the native checks with:
+After preparing the environment above, run the native checks with:
 
 ```bash
 .venv/bin/python -B -m unittest discover -v
@@ -111,4 +130,4 @@ Python 3.13+ and Textual 8.2.8 are the current targets. The repository-local env
 
 For dependency setup on another checkout, `make deps ui-env` downloads generic pinned wheels in the existing development container and installs them into a local venv. No system packages are installed. The application needs no Docker runtime. `make check` remains an optional offline container check; its allowlist excludes personal state.
 
-See [PRODUCT.md](docs/PRODUCT.md) for the current scope and [STATUS.md](docs/STATUS.md) for implementation evidence and remaining limits. Personal accuracy and usefulness require your review before the next phase.
+The September 24 refinement completed the selected-input, reconciliation and readable-profile workflow. [STATUS.md](docs/STATUS.md) records that implementation and its historical verification; this README cleanup did not rerun those checks. Personal accuracy and usefulness remain the next review gate. [PRODUCT.md](docs/PRODUCT.md) defines the active scope, and the older phases in [BUILD_PLAN.md](docs/BUILD_PLAN.md) remain deferred until explicitly resumed.
